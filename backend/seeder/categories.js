@@ -3,7 +3,7 @@ const categories = [
     name: "Computers",
     description:
       "Computers - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-    image: "/images/tablets-category.png",
+    image: "/images/monitor.png",
     attrs: [
       { key: "RAM", value: ["1 TB", "2 TB", "4 TB"] },
       { key: "color", value: ["blue", "red", "green", "black"] },
@@ -13,19 +13,19 @@ const categories = [
     name: "Computers/Laptops",
     description:
       "Computers/Laptops - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-    image: "/images/tablets-category.png",
+    image: "/images/laptop.jpg",
   },
   {
     name: "Computers/Laptops/Lenovo",
     description:
       "Computers/Laptops/Lenovo - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-    image: "/images/tablets-category.png",
+    image: "/images/laptop.jpg",
   },
   {
     name: "Computers/Laptops/Dell",
     description:
       "Computers/Laptops/Dell - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-    image: "/images/tablets-category.png",
+    image: "/images/laptop-dell.png",
   },
   {
     name: "Tablets",
@@ -37,13 +37,13 @@ const categories = [
     name: "Monitors",
     description:
       "Monitors - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-    image: "/images/monitors-category.png",
+    image: "/images/monitor.png",
   },
   {
     name: "Games",
     description:
       "Games - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-    image: "/images/games-category.png",
+    image: "/images/game.png",
   },
   {
     name: "Printers",
@@ -61,7 +61,7 @@ const categories = [
     name: "Cameras",
     description:
       "Cameras - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-    image: "/images/games-category.png",
+    image: "/images/game.png",
   },
   {
     name: "Books",
@@ -78,4 +78,4 @@ const categories = [
   },
 ]
 
-export default categories
+module.exports = categories

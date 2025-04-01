@@ -7,7 +7,7 @@ const products = [
     price: 100,
     category: "Computers/Laptops/Lenovo",
     images: [
-      { path: "/images/games-category.png" },
+      { path: "/images/laptop.jpg" },
       { path: "/images/monitors-category.png" },
       { path: "/images/tablets-category.png" },
     ],
@@ -24,7 +24,7 @@ const products = [
     price: 100,
     category: "Computers/Laptops/Lenovo",
     images: [
-      { path: "/images/games-category.png" },
+      { path: "/images/laptop.jpg" },
       { path: "/images/monitors-category.png" },
       { path: "/images/tablets-category.png" },
     ],
@@ -44,7 +44,7 @@ const products = [
     price: 100,
     category: "Computers/Laptops/Dell",
     images: [
-      { path: "/images/games-category.png" },
+      { path: "/images/laptop-dell.png" },
       { path: "/images/monitors-category.png" },
       { path: "/images/tablets-category.png" },
     ],
@@ -64,7 +64,7 @@ const products = [
     price: 100,
     category: "Tablets",
     images: [
-      { path: "/images/games-category.png" },
+      { path: "/images/tablet.png" },
       { path: "/images/monitors-category.png" },
       { path: "/images/tablets-category.png" },
     ],
@@ -81,7 +81,7 @@ const products = [
     category: "Tablets",
     images: [
       { path: "/images/monitors-category.png" },
-      { path: "/images/games-category.png" },
+      { path: "/images/tablet.png" },
       { path: "/images/tablets-category.png" },
     ],
     rating: 5,
@@ -98,7 +98,7 @@ const products = [
     images: [
       { path: "/images/tablets-category.png" },
       { path: "/images/monitors-category.png" },
-      { path: "/images/games-category.png" },
+      { path: "/images/tablet.png" },
     ],
     rating: 4,
     reviewsNumber: 7,
@@ -112,7 +112,7 @@ const products = [
     price: 400,
     category: "Tablets",
     images: [
-      { path: "/images/games-category.png" },
+      { path: "/images/tablet.png" },
       { path: "/images/tablets-category.png" },
       { path: "/images/monitors-category.png" },
     ],
@@ -129,7 +129,7 @@ const products = [
     category: "Tablets",
     images: [
       { path: "/images/monitors-category.png" },
-      { path: "/images/games-category.png" },
+      { path: "/images/tablet.png" },
       { path: "/images/tablets-category.png" },
     ],
     rating: 3,
@@ -144,7 +144,7 @@ const products = [
     price: 100,
     category: "Monitors",
     images: [
-      { path: "/images/games-category.png" },
+      { path: "/images/monitor.png" },
       { path: "/images/monitors-category.png" },
       { path: "/images/tablets-category.png" },
     ],
@@ -161,7 +161,7 @@ const products = [
     category: "Monitors",
     images: [
       { path: "/images/monitors-category.png" },
-      { path: "/images/games-category.png" },
+      { path: "/images/monitor.png" },
       { path: "/images/tablets-category.png" },
     ],
     rating: 5,
@@ -178,7 +178,7 @@ const products = [
     images: [
       { path: "/images/tablets-category.png" },
       { path: "/images/monitors-category.png" },
-      { path: "/images/games-category.png" },
+      { path: "/images/monitor.png" },
     ],
     rating: 4,
     reviewsNumber: 7,
@@ -192,7 +192,7 @@ const products = [
     price: 400,
     category: "Monitors",
     images: [
-      { path: "/images/games-category.png" },
+      { path: "/images/monitor.png" },
       { path: "/images/tablets-category.png" },
       { path: "/images/monitors-category.png" },
     ],
@@ -209,7 +209,7 @@ const products = [
     category: "Monitors",
     images: [
       { path: "/images/monitors-category.png" },
-      { path: "/images/games-category.png" },
+      { path: "/images/monitor.png" },
       { path: "/images/tablets-category.png" },
     ],
     rating: 3,
@@ -224,7 +224,7 @@ const products = [
     price: 100,
     category: "Games",
     images: [
-      { path: "/images/games-category.png" },
+      { path: "/images/game.png" },
       { path: "/images/monitors-category.png" },
       { path: "/images/tablets-category.png" },
     ],
@@ -240,8 +240,7 @@ const products = [
     price: 200,
     category: "Games",
     images: [
-      { path: "/images/monitors-category.png" },
-      { path: "/images/games-category.png" },
+      { path: "/images/game.png" },
       { path: "/images/tablets-category.png" },
     ],
     rating: 5,
@@ -258,7 +257,7 @@ const products = [
     images: [
       { path: "/images/tablets-category.png" },
       { path: "/images/monitors-category.png" },
-      { path: "/images/games-category.png" },
+      { path: "/images/games.png" },
     ],
     rating: 4,
     reviewsNumber: 7,
@@ -272,7 +271,7 @@ const products = [
     price: 400,
     category: "Games",
     images: [
-      { path: "/images/games-category.png" },
+      { path: "/images/game.png" },
       { path: "/images/tablets-category.png" },
       { path: "/images/monitors-category.png" },
     ],
@@ -289,7 +288,7 @@ const products = [
     category: "Games",
     images: [
       { path: "/images/monitors-category.png" },
-      { path: "/images/games-category.png" },
+      { path: "/images/game.png" },
       { path: "/images/tablets-category.png" },
     ],
     rating: 3,
@@ -298,4 +297,4 @@ const products = [
   },
 ]
 
-export default products
+module.exports = products

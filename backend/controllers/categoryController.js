@@ -1,8 +1,8 @@
-import { find, findOne, create } from "../models/CategoryModel"
+const Category = require("../models/CategoryModel")
 
 const getCategories = async (req, res, next) => {
     try {
-        const categories = await find({}).sort({name: "asc"}).orFail()
+        const categories = await Category.find({}).sort({name: "asc"}).orFail()
         res.json(categories)
     } catch(error) {
         next(error)
@@ -15,11 +15,11 @@ const newCategory = async (req, res, next) => {
         if(!category) {
             res.status(400).send("Category input is required")
         }
-        const categoryExists = await findOne({name: category})
+        const categoryExists = await Category.findOne({name: category})
         if(categoryExists) {
             res.status(400).send("Category already exists")
         } else {
-            const categoryCreated = await create({
+            const categoryCreated = await Category.create({
                 name: category
             })
             res.status(201).send({categoryCreated: categoryCreated})
@@ -33,7 +33,7 @@ const deleteCategory = async (req, res, next) => {
     // return res.send(req.params.category)
     try {
         if(req.params.category !== "Choose category") {
-            const categoryExists = await findOne({
+            const categoryExists = await Category.findOne({
                 name: decodeURIComponent(req.params.category)
             }).orFail()
             await categoryExists.remove()
@@ -51,7 +51,7 @@ const saveAttr = async (req, res, next) => {
     }
     try {
         const category = categoryChoosen.split("/")[0]
-        const categoryExists = await findOne({name: category}).orFail()
+        const categoryExists = await Category.findOne({name: category}).orFail()
         if(categoryExists.attrs.length > 0) {
             // if key exists in the database then add a value to the key
             var keyDoesNotExistsInDatabase = true
@@ -73,12 +73,11 @@ const saveAttr = async (req, res, next) => {
             categoryExists.attrs.push({key: key, value: [val]})
         }
         await categoryExists.save()
-        let cat = await find({}).sort({name: "asc"})
+        let cat = await Category.find({}).sort({name: "asc"})
         return res.status(201).json({categoriesUpdated: cat})
     } catch(err) {
         next(err)
     }
 }
 
-export default {getCategories, newCategory, deleteCategory, saveAttr}
-
+module.exports = {getCategories, newCategory, deleteCategory, saveAttr}

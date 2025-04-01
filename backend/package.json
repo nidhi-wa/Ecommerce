@@ -1,18 +1,29 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "server.cjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "server-prod": "node server.cjs",
+    "server-dev": "npx nodemon server.cjs",
+    "client": "npm run dev --prefix ../frontend2",
+    "dev": "concurrently --kill-others-on-fail \"npm run server-dev\" \"npm run client\"",
+    "seed:data": "node seeder/seeder",
+    "seed:data-d": "node seeder/seeder -d"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-fileupload": "^1.5.1",
+    "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.13.0",
+    "socket.io": "^4.8.1",
     "uuid": "^11.1.0"
   },
   "devDependencies": {

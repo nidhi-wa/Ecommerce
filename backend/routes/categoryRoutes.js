@@ -1,7 +1,7 @@
-import { Router } from 'express'
-const router = Router()
-import { getCategories, newCategory, deleteCategory, saveAttr } from "../controllers/categoryController"
-import { verifyIsLoggedIn, verifyIsAdmin } from "../middleware/verifyAuthToken"
+const express = require('express')
+const router = express.Router()
+const {getCategories, newCategory, deleteCategory, saveAttr} = require("../controllers/categoryController")
+const { verifyIsLoggedIn, verifyIsAdmin } = require("../middleware/verifyAuthToken")
 
 router.get("/", getCategories)
 
@@ -11,4 +11,4 @@ router.post("/", newCategory)
 router.delete("/:category", deleteCategory)
 router.post("/attr", saveAttr)
 
-export default router
+module.exports = router

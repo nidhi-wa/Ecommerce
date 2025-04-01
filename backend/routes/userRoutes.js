@@ -1,7 +1,7 @@
-import { Router } from 'express';
-const router = Router()
-import { verifyIsLoggedIn, verifyIsAdmin } from "../middleware/verifyAuthToken";
-import { getUsers, registerUser, loginUser, updateUserProfile, getUserProfile, writeReview, getUser, updateUser, deleteUser } from "../controllers/userController";
+const express = require('express')
+const router = express.Router()
+const { verifyIsLoggedIn, verifyIsAdmin } = require("../middleware/verifyAuthToken");
+const {getUsers, registerUser, loginUser, updateUserProfile, getUserProfile, writeReview, getUser, updateUser, deleteUser} = require("../controllers/userController")
 
 router.post("/register", registerUser)
 router.post("/login", loginUser)
@@ -19,4 +19,4 @@ router.get("/:id", getUser);
 router.put('/:id', updateUser)
 router.delete('/:id', deleteUser)
 
-export default router
+module.exports = router

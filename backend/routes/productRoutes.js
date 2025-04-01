@@ -1,8 +1,8 @@
-import { Router } from 'express'
-const router = Router()
-import { getProducts, getProductById, getBestsellers, adminGetProducts, adminDeleteProduct, adminCreateProduct, adminUpdateProduct, adminUpload, adminDeleteProductImage } from "../controllers/productController"
+const express = require('express')
+const router = express.Router()
+const {getProducts, getProductById, getBestsellers, adminGetProducts, adminDeleteProduct, adminCreateProduct, adminUpdateProduct, adminUpload, adminDeleteProductImage} = require("../controllers/productController")
 
-import { verifyIsLoggedIn, verifyIsAdmin } from "../middleware/verifyAuthToken"
+const { verifyIsLoggedIn, verifyIsAdmin } = require("../middleware/verifyAuthToken")
 
 router.get("/category/:categoryName/search/:searchQuery", getProducts)
 router.get("/category/:categoryName", getProducts)
@@ -21,4 +21,4 @@ router.put("/admin/:id", adminUpdateProduct)
 router.post("/admin/upload", adminUpload)
 router.post("/admin", adminCreateProduct)
 
-export default router
+module.exports = router

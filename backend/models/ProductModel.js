@@ -1,10 +1,10 @@
-import { Schema, model } from "mongoose"
-import Review from "./ReviewModel"
-const imageSchema = Schema({
+const mongoose = require("mongoose")
+const Review = require("./ReviewModel")
+const imageSchema = mongoose.Schema({
     path: {type: String, required: true}
 })
 
-const productSchema = Schema({
+const productSchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -43,18 +43,17 @@ const productSchema = Schema({
     images: [imageSchema],
     reviews: [
         {
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: Review,
         }
     ]
 }, {
     timestamps: true,
 })
-productSchema.index()
-const Product = model("Product", productSchema)
+const Product = mongoose.model("Product", productSchema)
 
 productSchema.index({name: "text", description: "text"}, {name: "TextIndex"})
 productSchema.index({"attrs.key":1, "attrs.value":1})
 // productSchema.index({name: -1})
 
-export default Product
+module.exports = Product

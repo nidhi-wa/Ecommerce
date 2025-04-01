@@ -1,5 +1,6 @@
-import { verify } from "jsonwebtoken"
+const jwt = require("jsonwebtoken")
 const verifyIsLoggedIn = (req, res, next) => {
+    
     try {
         const token = req.cookies.access_token
         if(!token) {
@@ -7,7 +8,7 @@ const verifyIsLoggedIn = (req, res, next) => {
         }
 
         try {
-           const decoded = verify(token, process.env.JWT_SECRET_KEY)
+           const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY)
             req.user = decoded
             next()
         } catch (err) {
@@ -20,6 +21,7 @@ const verifyIsLoggedIn = (req, res, next) => {
 }
 
 const verifyIsAdmin = (req, res, next) => {
+    
     if(req.user && req.user.isAdmin) {
         next()
     } else {
@@ -27,4 +29,4 @@ const verifyIsAdmin = (req, res, next) => {
     }
 }
 
-export default { verifyIsLoggedIn, verifyIsAdmin }
+module.exports = { verifyIsLoggedIn, verifyIsAdmin }

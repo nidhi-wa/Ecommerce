@@ -20,4 +20,4 @@ const imageValidate = (images) => {
     return { error: false }
 }
 
-export default imageValidate
+module.exports = imageValidate

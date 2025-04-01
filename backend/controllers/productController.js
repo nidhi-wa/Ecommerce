@@ -1,5 +1,5 @@
 const Product = require("../models/ProductModel");
-const recordsPerPage = require("../config/pagination").default;
+const recordsPerPage = require("../config/pagination");
 const imageValidate = require("../utils/imageValidate");
 
 const getProducts = async (req, res, next) => {
@@ -126,7 +126,7 @@ const getBestsellers = async (req, res, next) => {
         $group: { _id: "$category", doc_with_max_sales: { $first: "$$ROOT" } },
       },
       { $replaceWith: "$doc_with_max_sales" },
-      { $match: { sales: { $gt: 0 } } },
+      // { $match: { sales: { $gt: 0 } } },
       { $project: { _id: 1, name: 1, images: 1, category: 1, description: 1 } },
       { $limit: 3 },
     ]);
@@ -309,6 +309,3 @@ module.exports = {
   adminUpload,
   adminDeleteProductImage,
 };
-
-
-

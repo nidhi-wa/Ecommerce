@@ -1,12 +1,12 @@
-import { find, findOne, create, findById } from "../models/UserModel";
-import { startSession, create as _create } from "../models/ReviewModel";
-import { findById as _findById } from "../models/ProductModel";
-import { hashPassword, comparePasswords } from "../utils/hashPassword";
-import generateAuthToken from "../utils/generateAuthToken";
+const User = require("../models/UserModel");
+const Review = require("../models/ReviewModel");
+const Product = require("../models/ProductModel");
+const { hashPassword, comparePasswords } = require("../utils/hashPassword");
+const generateAuthToken = require("../utils/generateAuthToken");
 
 const getUsers = async (req, res, next) => {
   try {
-    const users = await find({}).select("-password");
+    const users = await User.find({}).select("-password");
     return res.json(users);
   } catch (err) {
     next(err);
@@ -20,12 +20,12 @@ const registerUser = async (req, res, next) => {
       return res.status(400).send("All inputs are required");
     }
 
-    const userExists = await findOne({ email });
+    const userExists = await User.findOne({ email });
     if (userExists) {
       return res.status(400).send("user exists");
     } else {
       const hashedPassword = hashPassword(password);
-      const user = await create({
+      const user = await User.create({
         name,
         lastName,
         email: email.toLowerCase(),
@@ -71,7 +71,7 @@ const loginUser = async (req, res, next) => {
       return res.status(400).send("All inputs are required");
     }
 
-    const user = await findOne({ email });
+    const user = await User.findOne({ email }).orFail();
     if (user && comparePasswords(password, user.password)) {
       let cookieParams = {
         httpOnly: true,
@@ -116,10 +116,9 @@ const loginUser = async (req, res, next) => {
 
 const updateUserProfile = async (req, res, next) => {
   try {
-    const user = await findById(req.user._id).orFail();
+    const user = await User.findById(req.user._id).orFail();
     user.name = req.body.name || user.name;
     user.lastName = req.body.lastName || user.lastName;
-    user.email = req.body.email || user.email;
     user.phoneNumber = req.body.phoneNumber;
     user.address = req.body.address;
     user.country = req.body.country;
@@ -148,7 +147,7 @@ const updateUserProfile = async (req, res, next) => {
 
 const getUserProfile = async (req, res, next) => {
     try {
-        const user = await findById(req.params.id).orFail();
+        const user = await User.findById(req.params.id).orFail();
         return res.send(user);
     } catch(err) {
         next(err)
@@ -158,7 +157,7 @@ const getUserProfile = async (req, res, next) => {
 const writeReview = async (req, res, next) => {
     try {
 
-        const session = await startSession();
+        const session = await Review.startSession();
 
         // get comment, rating from request.body:
         const { comment, rating } = req.body;
@@ -172,7 +171,7 @@ const writeReview = async (req, res, next) => {
         let reviewId = ObjectId();
 
         session.startTransaction();
-        await _create([
+        await Review.create([
             {
                 _id: reviewId,
                 comment: comment,
@@ -181,7 +180,7 @@ const writeReview = async (req, res, next) => {
             }
         ],{ session: session })
 
-        const product = await _findById(req.params.productId).populate("reviews").session(session);
+        const product = await Product.findById(req.params.productId).populate("reviews").session(session);
         
         const alreadyReviewed = product.reviews.find((r) => r.user._id.toString() === req.user._id.toString());
         if (alreadyReviewed) {
@@ -198,7 +197,8 @@ const writeReview = async (req, res, next) => {
             product.reviewsNumber = 1;
         } else {
             product.reviewsNumber = product.reviews.length;
-            product.rating = prc.map((item) => Number(item.rating)).reduce((sum, item) => sum + item, 0) / product.reviews.length;
+            let ratingCalc = prc.map((item) => Number(item.rating)).reduce((sum, item) => sum + item, 0) / product.reviews.length;
+            product.rating = Math.round(ratingCalc)
         }
         await product.save();
 
@@ -213,7 +213,7 @@ const writeReview = async (req, res, next) => {
 
 const getUser = async (req, res, next) => {
     try {
-        const user = await findById(req.params.id).select("name lastName email isAdmin").orFail();
+        const user = await User.findById(req.params.id).select("name lastName email isAdmin").orFail();
         return res.send(user);
     } catch (err) {
        next(err); 
@@ -222,12 +222,12 @@ const getUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
     try {
-       const user = await findById(req.params.id).orFail(); 
+       const user = await User.findById(req.params.id).orFail(); 
 
         user.name = req.body.name || user.name;
         user.lastName = req.body.lastName || user.lastName;
         user.email = req.body.email || user.email;
-        user.isAdmin = req.body.isAdmin || user.isAdmin;
+        user.isAdmin = req.body.isAdmin
 
         await user.save();
 
@@ -240,7 +240,7 @@ const updateUser = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
     try {
-       const user = await findById(req.params.id).orFail();
+       const user = await User.findById(req.params.id).orFail();
        await user.remove(); 
        res.send("user removed");
     } catch (err) {
@@ -248,5 +248,4 @@ const deleteUser = async (req, res, next) => {
     }
 }
 
-export default { getUsers, registerUser, loginUser, updateUserProfile, getUserProfile, writeReview, getUser, updateUser, deleteUser };
-
+module.exports = { getUsers, registerUser, loginUser, updateUserProfile, getUserProfile, writeReview, getUser, updateUser, deleteUser };

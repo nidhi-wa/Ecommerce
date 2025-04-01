@@ -1,10 +1,10 @@
 const Order = require("../models/OrderModel");
 const Product = require("../models/ProductModel");
-const ObjectId = require("mongodb").ObjectId;
+const mongoose = require("mongoose");
 
 const getUserOrders = async (req, res, next) => {
     try {
-        const orders = await Order.find({ user: ObjectId(req.user._id) });
+        const orders = await Order.find({ user: mongoose.Types.ObjectId.createFromHexString(req.user._id) });
         res.send(orders);
     } catch (error) {
         next(error)
@@ -42,7 +42,7 @@ const createOrder = async (req, res, next) => {
         })
 
         const order = new Order({
-            user: ObjectId(req.user._id),
+            user: mongoose.Types.ObjectId.createFromHexString(req.user._id),
             orderTotal: orderTotal,
             cartItems: cartItems,
             paymentMethod: paymentMethod,

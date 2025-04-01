@@ -1,31 +1,31 @@
-import { ObjectId } from "mongodb"
+const ObjectId = require("mongodb").ObjectId;
 
 const reviews = [
-    {
-    comment: "Review. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ipsa ducimus architecto explicabo id accusantium nihil exercitationem autem porro esse.",
+  {
+    comment: "Review. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     rating: 5,
-    user: { _id: ObjectId(), name: "John Doe" },
+    user: { _id: new ObjectId(), name: "John Doe" },        
   },
   {
-    comment: "Review. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ipsa ducimus architecto explicabo id accusantium nihil exercitationem autem porro esse.",
+    comment: "Review. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     rating: 5,
-    user: { _id: ObjectId(), name: "John Doe" },
+    user: { _id: new ObjectId(), name: "John Doe" },
   },
   {
-    comment: "Review. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ipsa ducimus architecto explicabo id accusantium nihil exercitationem autem porro esse.",
+    comment: "Review. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     rating: 5,
-    user: { _id: ObjectId(), name: "John Doe" },
+    user: { _id: new ObjectId(), name: "John Doe" },
   },
   {
-    comment: "Review. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ipsa ducimus architecto explicabo id accusantium nihil exercitationem autem porro esse.",
+    comment: "Review. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     rating: 4,
-    user: { _id: ObjectId(), name: "John Doe" },
+    user: { _id: new ObjectId(), name: "John Doe" },
   },
   {
-    comment: "Review. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ipsa ducimus architecto explicabo id accusantium nihil exercitationem autem porro esse.",
+    comment: "Review. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     rating: 3,
-    user: { _id: ObjectId(), name: "John Doe" },
+    user: { _id: new ObjectId(), name: "John Doe" },
   },
-]
+];
 
-export default reviews
+module.exports = reviews;
