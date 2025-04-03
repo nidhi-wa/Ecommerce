@@ -3,6 +3,7 @@ var helmet = require('helmet')
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const express = require("express");
+const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
 const app = express();
@@ -11,9 +12,19 @@ app.use(helmet({
     contentSecurityPolicy: false, 
     crossOriginEmbedderPolicy: false
 }))
+app.use(cors({
+  origin: "http://localhost:5173",  // Allow frontend URL
+  credentials: true
+}));
 
 const httpServer = createServer(app);
-global.io = new Server(httpServer);
+global.io = new Server(httpServer, {
+  cors: {
+    origin: "http://localhost:5173", // ✅ Allow frontend requests
+    methods: ["GET", "POST"],
+    credentials: true
+  }
+});
 
 app.use(express.json());
 app.use(cookieParser());
@@ -30,6 +41,7 @@ io.on("connection", (socket) => {
     admins.push({ id: socket.id, admin: adminName });
   });
   socket.on("client sends message", (msg) => {
+    console.log(msg,'msg');
     if (admins.length === 0) {
       socket.emit("no admin", "");
     } else {

@@ -17,14 +17,18 @@ const UserChatComponent = () => {
 
   const userInfo = useSelector((state) => state.userRegisterLogin.userInfo);
 
+
   useEffect(() => {
     if (!userInfo.isAdmin) {
         setReconnect(false);
          var audio = new Audio("/audio/chat-msg.mp3");
-      const socket = socketIOClient();
+      const socket = socketIOClient("http://localhost:5000", {
+  transports: ["websocket", "polling"], // Ensures connection
+  withCredentials: true, // ✅ Important for CORS
+});
       socket.on("no admin", (msg) => {
           setChat((chat) => {
-              return [...chat, { admin: "no admin here now" }];
+              return [...chat, { admin: msg }];
           })
       })
       socket.on("server sends message from admin to client", (msg) => {

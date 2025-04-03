@@ -1,10 +1,10 @@
 # --- Node dependencies ---
 # Frontend and Backend node_modules
-frontend/node_modules/
+frontend2/node_modules/
 backend/node_modules/
 
 # Frontend and Backend env files
-frontend/.env
+frontend2/.env
 backend/.env
 
 # --- Build outputs ---

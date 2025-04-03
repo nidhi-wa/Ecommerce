@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 
 const AdminChatRoomComponent = ({ chatRoom, roomIndex, socket, socketUser }) => {
 
+
     const dispatch = useDispatch();
 
   [window["toast" + roomIndex], window["closeToast" + roomIndex]] =
@@ -18,10 +19,16 @@ const AdminChatRoomComponent = ({ chatRoom, roomIndex, socket, socketUser }) => 
 
   const adminSubmitChatMsg = (e, elem) => {
       e.preventDefault();
+      console.log("Socket Object:", socket);
+if (!socket) {
+  console.error("Socket is not connected!");
+  return;
+}
       if (e.keyCode && e.keyCode !== 13) {
           return;
       }
       const msg = document.getElementById(elem);
+  
       let v = msg.value.trim();
       if (v === "" || v === null || v === false || !v) {
          return; 
