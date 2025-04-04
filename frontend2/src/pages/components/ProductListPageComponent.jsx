@@ -35,7 +35,7 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
   useEffect(() => {
     if (categoryName && categories.length > 0) {
       let categoryAllData = categories.find(
-        (item) => item.name === categoryName.replaceAll(",", "/")
+        (item) => item.name === categoryName.replace(/,/g, "/")
       );
   
       if (categoryAllData) {
